@@ -11,14 +11,14 @@
     name: common
     tasks_from: download
 
-#- name: Install NodeJs Dependencies
-#  community.general.npm:
-#    path: "{{ APP_LOCATION }}"
-#
-#- name: Systemd setup for {{ COMPONENT }}
-#  ansible.builtin.include_role:
-#    name: common
-#    tasks_from: systemd
+- name: Install NodeJs Dependencies
+  community.general.npm:
+    path: "{{ APP_LOCATION }}"
+
+- name: Systemd setup for {{ COMPONENT }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
 
 
 
