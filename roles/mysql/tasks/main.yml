@@ -56,14 +56,14 @@
     src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
     dest: /tmp
     remote_src: yes
-#
-#- name: load schema
-#  community.mysql.mysql_db:
-#    state: import
-#    name: all
-#    target: /tmp/mysql-main/shipping.sql
-#    login_user: root
-#    login_password: "{{MYSQL_PASSWORD}}"
+
+- name: load schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-main/shipping.sql
+    login_user: root
+    login_password: "{{MYSQL_PASSWORD}}"
 
 
 
