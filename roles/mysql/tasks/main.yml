@@ -21,14 +21,14 @@
     state: started
     enabled: yes
 
-#- name: Fetch MYSQL log file
-#  ansible.builtin.slurp:
-#    src: /var/log/mysqld.log
-#  register: mysql_log
-#
-#- name: Fetch password from MYSQL log file
-#  ansible.builtin.set_fact:
-#    DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ')| split(' ') | last}}"
+- name: Fetch MYSQL log file
+  ansible.builtin.slurp:
+    src: /var/log/mysqld.log
+  register: mysql_log
+
+- name: Fetch password from MYSQL log file
+  ansible.builtin.set_fact:
+    DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ')| split(' ') | last}}"
 #
 #- name: Check MYSQL_PASSWORD is reset or not
 #  community.mysql.mysql_info:
