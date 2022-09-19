@@ -50,12 +50,12 @@
 - name: Remove validate password plugin
   ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
   when: plugin_info is succeeded
-#
-#- name: Download and Extract {{ COMPONENT }} content
-#  ansible.builtin.unarchive:
-#    src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
-#    dest: /tmp
-#    remote_src: yes
+
+- name: Download and Extract {{ COMPONENT }} content
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
+    dest: /tmp
+    remote_src: yes
 #
 #- name: load schema
 #  community.mysql.mysql_db:
