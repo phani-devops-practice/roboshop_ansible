@@ -16,10 +16,10 @@
     name: common
     tasks_from: download
 
-#- name: Install python Dependencies
-#  ansible.builtin.pip:
-#    requirements: "{{ APP_LOCATION }}/requirements.txt"
-#    executable: pip3
+- name: Install python Dependencies
+  ansible.builtin.pip:
+    requirements: "{{ APP_LOCATION }}/requirements.txt"
+    executable: pip3
 
 - name: update {{ COMPONENT }} configuration with root permissions
   ansible.builtin.lineinfile:
@@ -27,8 +27,8 @@
     regexp: '^{item.key}'
     line: "{{item.line}}"
   loop:
-    - {key="uid", line: "uid = {{app_user.uid}}"}
-    - {key="gid", line: "gid = {{app_user.group}}"}
+    - {key: "uid" , line: "uid = {{app_user.uid}}"}
+    - {key: "gid" , line: "gid = {{app_user.group}}"}
 
 - name: Systemd setup for {{ COMPONENT }}
   ansible.builtin.include_role:
