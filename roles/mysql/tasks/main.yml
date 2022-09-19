@@ -1,0 +1,72 @@
+- name: Fail if the MYSQL_PASSWORD does not exists
+  ansible.builtin.fail:
+    msg: MYSQL_PASSWORD variable is missing
+  when: MYSQL_PASSWORD is undefined
+
+- name: copy Mysql repo file
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install Mysql
+  ansible.builtin.yum:
+    name:
+      - mysql-community-server
+      - MySQL-python
+    state: installed
+
+- name: start MYSQL service
+  ansible.builtin.systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
+#- name: Fetch MYSQL log file
+#  ansible.builtin.slurp:
+#    src: /var/log/mysqld.log
+#  register: mysql_log
+#
+#- name: Fetch password from MYSQL log file
+#  ansible.builtin.set_fact:
+#    DEFAULT_PASSWORD: "{{mysql_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ')| split(' ') | last}}"
+#
+#- name: Check MYSQL_PASSWORD is reset or not
+#  community.mysql.mysql_info:
+#    login_user: root
+#    login_password: "{{MYSQL_PASSWORD}}"
+#    filter: version
+#  ignore_errors: yes
+#  register: mysql_connection
+#
+#- name: reset MYSQL password
+#  ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
+#  when: mysql_connection is failed
+#
+#- name: check validate password plugin
+#  ansible.builtin.shell: echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password
+#  register: plugin_info
+#  ignore_errors: yes
+#
+#- name: Remove validate password plugin
+#  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
+#  when: plugin_info is succeeded
+#
+#- name: Download and Extract {{ COMPONENT }} content
+#  ansible.builtin.unarchive:
+#    src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/main.zip
+#    dest: /tmp
+#    remote_src: yes
+#
+#- name: load schema
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /tmp/mysql-main/shipping.sql
+#    login_user: root
+#    login_password: "{{MYSQL_PASSWORD}}"
+
+
+
+
+
+
