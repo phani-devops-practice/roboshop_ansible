@@ -1,0 +1,9 @@
+- name: Import Common Role- GOLANG
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: golang
+
+
+
+
+

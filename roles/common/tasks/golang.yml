@@ -1,0 +1,19 @@
+- name: Install golang
+  ansible.builtin.yum:
+    name: golang
+    state: installed
+
+- name: Import common app setup configuration
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install golang dependencies
+  ansible.builtin.shell: go mod init {{ COMPONENT }} && go get && go build
+  args:
+    chdir: /home/roboshop/{{ COMPONENT }}
+
+- name: Systemd setup for {{ COMPONENT }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
