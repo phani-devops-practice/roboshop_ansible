@@ -1,0 +1,31 @@
+- name: Install Nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: installed
+
+- name: Inculded {{ COMPONENT }} role
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Copy roboshop configuration file
+  ansible.builtin.template:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: start Nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+
+
+
+
+
+
+
+
+
+
+
