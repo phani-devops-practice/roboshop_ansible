@@ -41,15 +41,15 @@
 - name: reset MYSQL password
   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{MYSQL_PASSWORD}}';" | mysql  --connect-expired-password -uroot -p"{{DEFAULT_PASSWORD}}"
   when: mysql_connection is failed
-#
-#- name: check validate password plugin
-#  ansible.builtin.shell: echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password
-#  register: plugin_info
-#  ignore_errors: yes
-#
-#- name: Remove validate password plugin
-#  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
-#  when: plugin_info is succeeded
+
+- name: check validate password plugin
+  ansible.builtin.shell: echo show plugins | mysql -uroot -p"{{MYSQL_PASSWORD}}" | grep validate_password
+  register: plugin_info
+  ignore_errors: yes
+
+- name: Remove validate password plugin
+  ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -p"{{MYSQL_PASSWORD}}"
+  when: plugin_info is succeeded
 #
 #- name: Download and Extract {{ COMPONENT }} content
 #  ansible.builtin.unarchive:
