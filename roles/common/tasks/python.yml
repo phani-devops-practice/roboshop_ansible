@@ -16,10 +16,10 @@
     name: common
     tasks_from: download
 
-- name: Install python Dependencies
-  ansible.builtin.pip:
-    requirements: "{{ APP_LOCATION }}/requirements.txt"
-    executable: pip3
+#- name: Install python Dependencies
+#  ansible.builtin.pip:
+#    requirements: "{{ APP_LOCATION }}/requirements.txt"
+#    executable: pip3
 
 - name: update {{ COMPONENT }} configuration with root permissions
   ansible.builtin.lineinfile:
