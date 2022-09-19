@@ -1,0 +1,4 @@
+COMPONENT: payment
+APP_LOCATION: /home/roboshop/{{ COMPONENT }}
+SUFFIX: /
+
