@@ -38,9 +38,8 @@
 - name: declare URL fact
   ansible.builtin.set_fact:
     URL: http://nexus-p.roboshop.internal:8081/repository/{{ COMPONENT }}/{{ENV}}-{{ COMPONENT }}-{{APP_VERSION}}.zip
-  when: APP_VERSION is defined
+  when: APP_VERSION is defined    
   
-
 
 - name: Download and Extract {{ COMPONENT }} Component Archive from Nexus
   ansible.builtin.unarchive:
