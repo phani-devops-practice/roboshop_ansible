@@ -3,11 +3,51 @@
     name: golang
     state: installed
 
-- name: App setup {{ COMPONENT }} content
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download
-    
+- name: Remove app location
+  ansible.builtin.file:
+    path: "{{ APP_LOCATION }}"
+    state: absent
+
+- name: add app location
+  ansible.builtin.file:
+    path: "{{ APP_LOCATION }}"
+    state: directory
+
+#- name: Download and Extract {{ COMPONENT }} content
+#  ansible.builtin.unarchive:
+#    src: https://github.com/roboshop-devops-project/{{ COMPONENT }}/archive/refs/heads/main.zip
+#    dest: /tmp
+#    remote_src: yes
+
+#
+#- name: copy {{ COMPONENT }}
+#  ansible.builtin.copy:
+#    src: /tmp/{{ COMPONENT }}-main/{{SUFFIX}}
+#    dest: "{{ APP_LOCATION }}/"
+#    remote_src: yes
+
+- name: Fetch the latest version to {{ COMPONENT }} to Nexus
+  ansible.builtin.shell: curl -s http://nexus-p.roboshop.internal:8081/service/rest/repository/browse/{{ COMPONENT }}/ | grep zip | grep "{{ENV}}-{{COMPONENT}}" | sed -e 's/"/ /g' | xargs -n1 | grep ^http
+  register: out
+  when: APP_VERSION is not defined
+
+- name: declare URL fact
+  ansible.builtin.set_fact:
+    URL: "{{out.stdout}}"
+  when: APP_VERSION is not defined
+
+- name: declare URL fact
+  ansible.builtin.set_fact:
+    URL: http://nexus-p.roboshop.internal:8081/repository/{{ COMPONENT }}/{{ENV}}-{{ COMPONENT }}-{{APP_VERSION}}.zip
+  when: APP_VERSION is defined
+
+- name: Download and Extract {{ COMPONENT }} content
+  ansible.builtin.unarchive:
+    src: "{{URL}}"
+    dest: "{{ APP_LOCATION }}"
+    remote_src: yes
+
+
 #- name: Install golang dependencies
 #  ansible.builtin.shell: go mod init {{ COMPONENT }} && go get && go build
 #  args:
