@@ -15,7 +15,7 @@
 
 - name: print
   debug:
-    msg: "{{APP_VERSION}}"
+    msg: "{{URL}}"
 
 - name: declare URL fact
   ansible.builtin.set_fact:
