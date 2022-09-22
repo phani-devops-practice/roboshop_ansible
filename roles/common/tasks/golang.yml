@@ -13,9 +13,6 @@
     URL: "{{out.stdout}}"
   when: APP_VERSION is not defined
 
-- name: print
-  debug:
-    msg: "{{URL}}"
 
 - name: declare URL fact
   ansible.builtin.set_fact:
