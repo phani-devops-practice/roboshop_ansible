@@ -26,8 +26,8 @@
 #    dest: "{{ APP_LOCATION }}/"
 #    remote_src: yes
 
-- name: Fetch the latest version to {{ COMPONENT }} to Nexus
-  ansible.builtin.shell: curl -s http://nexus-p.roboshop.internal:8081/service/rest/repository/browse/{{ COMPONENT }}/ | grep zip | grep "{{ENV}}-{{COMPONENT}}" | sed -e 's/"/ /g' | xargs -n1 | grep ^http
+- name: Fetch the latest version of Nexus
+  ansible.builtin.shell: curl -s http://nexus-p.roboshop.internal:8081/service/rest/repository/browse/{{ COMPONENT }}/ | grep zip | grep "{{ENV}}-{{COMPONENT}}" | sed -e 's/"/ /g' | xargs -n1 | grep ^http | tail -1
   register: out
   when: APP_VERSION is not defined
 
