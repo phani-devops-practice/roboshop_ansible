@@ -24,7 +24,7 @@
     src: "{{URL}}"
     dest: /home/roboshop/{{ COMPONENT }}
     remote_src: yes
-  ignore_errors: yes
+
 
 #
 #- name: Install golang dependencies
