@@ -13,6 +13,10 @@
     URL: "{{out.stdout}}"
   when: APP_VERSION is not defined
 
+- name: print
+  debug:
+    msg: "{{APP_VERSION}}"
+
 - name: declare URL fact
   ansible.builtin.set_fact:
     URL: http://nexus-p.roboshop.internal:8081/repository/{{ COMPONENT }}/{{ENV}}-{{ COMPONENT }}-{{APP_VERSION}}.zip
