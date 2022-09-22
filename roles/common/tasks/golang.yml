@@ -22,7 +22,7 @@
 - name: Download and Extract {{ COMPONENT }} Component Archive from Nexus
   ansible.builtin.unarchive:
     src: "{{URL}}"
-    dest: "{{ APP_LOCATION }}"
+    dest: /home/roboshop/{{ COMPONENT }}
     remote_src: yes
   ignore_errors: yes
 
