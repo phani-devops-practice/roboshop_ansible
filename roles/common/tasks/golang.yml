@@ -25,6 +25,7 @@
     src: "{{URL}}"
     dest: "{{ APP_LOCATION }}"
     remote_src: yes
+  ignore_errors: yes
 
 
 
