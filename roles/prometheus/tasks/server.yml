@@ -1,0 +1,4 @@
+- name: Update the prometheus configuration
+  ansible.builtin.template:
+    src: prometheus
+    dest: /opt/prometheus/prometheus.yml
