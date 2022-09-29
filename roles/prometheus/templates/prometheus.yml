@@ -15,6 +15,8 @@ rule_files:
 
 
 scrape_configs:
-  - job_name: "prometheus"
+  - job_name: "ec2_nodes"
     static_configs:
       - targets: ["172.31.83.19:9100"]
+    ec2_sd_configs:
+      - region: us-east-1
