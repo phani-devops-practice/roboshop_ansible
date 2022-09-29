@@ -1,11 +1,11 @@
-#- name: Setup prometheus server
-#  ansible.builtin.include_role:
-#    name: prometheus
-#    tasks_from: server
-#  when: SETUP_TASK == "server"
-#
-#- name: Setup prometheus client
-#  ansible.builtin.include_role:
-#    name: prometheus
-#    tasks_from: client
-#  when: SETUP_TASK == "client"
+- name: Setup prometheus server
+  ansible.builtin.include_role:
+    name: prometheus
+    tasks_from: server
+  when: SETUP_TASK == "server"
+
+- name: Setup prometheus client
+  ansible.builtin.include_role:
+    name: prometheus
+    tasks_from: client
+  when: SETUP_TASK == "client"

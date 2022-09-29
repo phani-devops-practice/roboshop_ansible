@@ -1,5 +1,5 @@
 dependencies:
   - role: common
-#  - role: prometheus
-#    vars:
-#        SETUP_TASK: client
+  - role: prometheus
+    vars:
+        SETUP_TASK: client
