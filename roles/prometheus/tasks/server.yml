@@ -1,16 +1,16 @@
-- name: Update the prometheus configuration
-  ansible.builtin.template:
-    src: prometheus.yml
-    dest: /opt/prometheus/prometheus.yml
-
-- name: Restart the prometheus service
-  ansible.builtin.systemd:
-    name: prometheus
-    state: restarted
-
-- name: Check the prometheus service running or not
-  ansible.builtin.wait_for:
-    host: 0.0.0.0
-    port: 9090
-    delay: 10
-    timeout: 15
+#- name: Update the prometheus configuration
+#  ansible.builtin.template:
+#    src: prometheus.yml
+#    dest: /opt/prometheus/prometheus.yml
+#
+#- name: Restart the prometheus service
+#  ansible.builtin.systemd:
+#    name: prometheus
+#    state: restarted
+#
+#- name: Check the prometheus service running or not
+#  ansible.builtin.wait_for:
+#    host: 0.0.0.0
+#    port: 9090
+#    delay: 10
+#    timeout: 15
