@@ -12,6 +12,7 @@
   ansible.builtin.template:
     src: filebeat.yml
     dest: /etc/filebeat/filebeat.yml
+
                                         
 - name: Restart filebeat
   ansible.builtin.systemd:
