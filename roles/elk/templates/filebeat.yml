@@ -1,4 +1,3 @@
-
 filebeat.inputs:
 - type: file
   enabled: true
