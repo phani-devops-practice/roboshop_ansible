@@ -3,4 +3,7 @@ dependencies:
   - role: prometheus
     vars:
       SETUP_TASK: client
+  - role: elk
+    vars:
+      SETUP_TASK: rsyslog
 
