@@ -1,0 +1,5 @@
+- name: Setup elk server
+  ansible.builtin.include_role:
+    name: elk
+    tasks_from: rsyslog
+  when: SETUP_TASK == "rsyslog"
