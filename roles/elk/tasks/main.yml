@@ -4,9 +4,4 @@
     tasks_from: rsyslog
   when: SETUP_TASK == "rsyslog"
 
-- name: Setup elk file beat server
-  ansible.builtin.include_role:
-    name: elk
-    tasks_from: filebeat
-  when: SETUP_TASK == "filebeat"
 

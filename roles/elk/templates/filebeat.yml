@@ -25,3 +25,8 @@ processors:
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
 
+output.elasticsearch.index: "{{COMPONENT}}"
+setup.template.name: "{{COMPONENT}}"
+setup.template.pattern: "{{COMPONENT}}"
+
+
