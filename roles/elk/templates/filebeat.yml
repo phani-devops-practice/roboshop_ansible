@@ -7,7 +7,7 @@ filebeat.inputs:
 
 output.elasticsearch:
   index: "{{COMPONENT}}"
-  hosts: ["elk-p.roboshop.internal:9200"]
+  hosts: ["elasticsearch-p.roboshop.internal:9200"]
 
   
 
